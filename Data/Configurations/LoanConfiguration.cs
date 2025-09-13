@@ -11,7 +11,7 @@ namespace LibraryManagementSystem.Data.Configurations
 {
     public class LoanConfiguration : EntityTypeConfiguration<Models.Loan>
     {
-        public override void Configure(EntityTypeBuilder<Loan> builder)
+        protected override void Configure(EntityTypeBuilder<Loan> builder)
         {
             builder.ToTable("Loan");
 
@@ -44,7 +44,7 @@ namespace LibraryManagementSystem.Data.Configurations
                 .HasMaxLength(20)
                 .HasDefaultValue("Active");
 
-            // Veze 
+            // Definisanje Delete Behavior-a
             builder.HasOne(l => l.Book)
                 .WithMany(b => b.Loans)
                 .HasForeignKey(l => l.BookId)
@@ -54,6 +54,8 @@ namespace LibraryManagementSystem.Data.Configurations
                 .WithMany(m => m.Loans)
                 .HasForeignKey(l => l.MemberId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            ConfigureBase(builder);
         }
     }
 }

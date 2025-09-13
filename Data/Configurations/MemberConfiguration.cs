@@ -6,7 +6,7 @@ namespace LibraryManagementSystem.Data.Configurations
 {
     public class MemberConfiguration : EntityTypeConfiguration<Models.Member>
     {
-        public override void Configure(EntityTypeBuilder<Member> builder)
+        protected override void Configure(EntityTypeBuilder<Member> builder)
         {
             builder.ToTable("Member");
 
@@ -42,6 +42,7 @@ namespace LibraryManagementSystem.Data.Configurations
                 .IsRequired()
                 .HasDefaultValue(5);
 
+            ConfigureBase(builder);
         }
     }
 }

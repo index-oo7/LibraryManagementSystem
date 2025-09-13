@@ -6,7 +6,7 @@ namespace LibraryManagementSystem.Data.Configurations
 {
     public class AuthorConfiguration : EntityTypeConfiguration<Models.Author>
     {
-        public override void Configure(EntityTypeBuilder<Author> builder)
+        protected override void Configure(EntityTypeBuilder<Author> builder)
         {
             builder.ToTable("Author");
 
@@ -25,6 +25,8 @@ namespace LibraryManagementSystem.Data.Configurations
 
             builder.Property(a => a.BirthDate)
                 .HasColumnType("date");
+
+            ConfigureBase(builder);
         }
     }
 }

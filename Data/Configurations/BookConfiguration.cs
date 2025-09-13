@@ -6,7 +6,7 @@ namespace LibraryManagementSystem.Data.Configurations
 {
     public class BookConfiguration : EntityTypeConfiguration<Models.Book>
     {
-        public override void Configure(EntityTypeBuilder<Book> builder)
+        protected override void Configure(EntityTypeBuilder<Book> builder)
         {
             builder.ToTable("Book");
 
@@ -38,6 +38,8 @@ namespace LibraryManagementSystem.Data.Configurations
             builder.Property(b => b.AvailableCopies)
                 .IsRequired()
                 .HasDefaultValue(1);
+
+            ConfigureBase(builder);
         }
     }
 }

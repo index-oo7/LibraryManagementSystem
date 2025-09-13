@@ -16,7 +16,27 @@ namespace LibraryManagementSystem.Data.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // TODO: Implementirati
+            modelBuilder.Configurations.AddFromAssembly(typeof(LibraryManagementSystemContext).Assembly);
+
+            modelBuilder.Entity<Models.Book>()
+                .HasMany(b => b.Authors)
+                .WithMany(a => a.Books)
+                .Map(m =>
+                {
+                    m.ToTable("BookAuthor");
+                    m.MapLeftKey("BookId");
+                    m.MapRightKey("AuthorId");
+                });
+
+            modelBuilder.Entity<Models.Book>()
+                .HasIndex(b => b.ISBN)
+                .IsUnique();
+
+            modelBuilder.Entity<Models.Member>()
+                .HasIndex(m => m.Email)
+                .IsUnique();
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

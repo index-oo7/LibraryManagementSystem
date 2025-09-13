@@ -6,7 +6,7 @@ namespace LibraryManagementSystem.Data.Configurations
 {
     public class BaseEntityConfiguration : EntityTypeConfiguration<Models.BaseEntity>
     {
-        public override void Configure(EntityTypeBuilder<BaseEntity> builder)
+        protected override void Configure(EntityTypeBuilder<BaseEntity> builder)
         {
             builder.Property(a => a.CreatedDate)
                 .IsRequired()
